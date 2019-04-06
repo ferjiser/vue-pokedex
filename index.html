@@ -8,13 +8,15 @@
       <title>Vue Pokedex</title>
       <!-- CSS -->
       <link rel="stylesheet" href="style.css">
+      <style>[v-cloak]{display:none}</style>
    </head>
    <body>
       <header class="main-header">
          Vue - Pokedex
       </header>
-      <div id="app" class="main-content">
+      <div id="app" class="main-content" v-cloak>
          <aside class="pokedex-filters">
+             {{message}}
             <div class="nice-input-wrapper"><input type="text" placeholder="Search by name" class="nice-input"> <span class="focus-border"><i></i></span></div>
             <p class="checkboxes-list-title">Type</p>
             <div class="checkboxes-list">
@@ -32,70 +34,18 @@
             <article class="pokemons-list">
                <div class="pokemon-card">
                   <div class="background-wrapper">
-                     <div style="background-color: rgb(160, 64, 160);"></div>
-                     <div style="background-color: rgb(120, 200, 80);"></div>
+                     <div :style="'background-color: '+TYPE_COLOR[pokemon.types[0]] +';'"></div>
                   </div>
                   <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/bulbasaur.png" alt="bulbasaur" class="pokemon-image"></div>
+                  <div class="image-wrapper"><img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image"></div>
                   <div class="pokemon-title">
-                     bulbasaur
-                  </div>
-               </div>
-               <div class="pokemon-card">
-                  <div class="background-wrapper">
-                     <div style="background-color: rgb(160, 64, 160);"></div>
-                     <div style="background-color: rgb(120, 200, 80);"></div>
-                  </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/ivysaur.png" alt="bulbasaur" class="pokemon-image"></div>
-                  <div class="pokemon-title">
-                     ivysaur
-                  </div>
-               </div>
-               <div class="pokemon-card">
-                  <div class="background-wrapper">
-                     <div style="background-color: rgb(160, 64, 160);"></div>
-                     <div style="background-color: rgb(120, 200, 80);"></div>
-                  </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/venusaur.png" alt="bulbasaur" class="pokemon-image"></div>
-                  <div class="pokemon-title">
-                     venusaur
-                  </div>
-               </div>
-               <div class="pokemon-card">
-                  <div class="background-wrapper">
-                     <div style="background-color: rgb(240, 128, 48);"></div>
-                  </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/charmander.png" alt="bulbasaur" class="pokemon-image"></div>
-                  <div class="pokemon-title">
-                     charmander
-                  </div>
-               </div>
-               <div class="pokemon-card">
-                  <div class="background-wrapper">
-                     <div style="background-color: rgb(240, 128, 48);"></div>
-                  </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/charmeleon.png" alt="bulbasaur" class="pokemon-image"></div>
-                  <div class="pokemon-title">
-                     charmeleon
-                  </div>
-               </div>
-               <div class="pokemon-card">
-                  <div class="background-wrapper">
-                     <div style="background-color: rgb(168, 144, 240);"></div>
-                     <div style="background-color: rgb(240, 128, 48);"></div>
-                  </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
-                  <div class="image-wrapper"><img src="images/pokemons/charizard.png" alt="bulbasaur" class="pokemon-image"></div>
-                  <div class="pokemon-title">
-                     charizard
+                     {{pokemon.name}}
                   </div>
                </div>
             </article>
          </main>
       </div>
+      <script src="http://unpkg.com/vue"></script>
+      <script src="main.js"></script>
    </body>
 </html>
