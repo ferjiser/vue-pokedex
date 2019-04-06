@@ -16,7 +16,10 @@
       </header>
       <div id="app" class="main-content" v-cloak>
          <aside class="pokedex-filters">
-            <div class="nice-input-wrapper"><input type="text" placeholder="Search by name" class="nice-input"> <span class="focus-border"><i></i></span></div>
+            <div class="nice-input-wrapper">
+                <input v-model="searchText" type="text" placeholder="Search by name" class="nice-input"> 
+                <span class="focus-border"><i></i></span>
+            </div>
             <p class="checkboxes-list-title">Type</p>
             <div class="checkboxes-list">
                <div class="md-checkbox"><input id="checkbox-grass" type="checkbox" value="grass"> <label for="checkbox-grass"><i class="material-icons" style="color: rgb(120, 200, 80);">lens</i> <span class="label-title">grass</span></label></div>
@@ -31,11 +34,12 @@
          </aside>
          <main class="main-view">
             <article class="pokemons-list">
-               <div class="pokemon-card" v-for="pokemon in pokemons">
+               <div class="pokemon-card" v-for="pokemon in filteredPokemons" :key="pokemon.id">
                   <div class="background-wrapper">
-                     <div v-for="type in pokemon.types" :style="{'background-color': TYPE_COLOR[type]}"></div>
+                     <div v-for="type in pokemon.types" :key="type" :style="{'background-color': TYPE_COLOR[type]}"></div>
                   </div>
-                  <span class="remove-pokemon"><i class="material-icons">close</i></span> 
+                  <!-- v-on:click igual onclick -->
+                  <span @click="removePokemon(pokemon)" class="remove-pokemon"><i class="material-icons">close</i></span>
                   <div class="image-wrapper"><img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image"></div>
                   <div class="pokemon-title">
                      {{pokemon.name}}

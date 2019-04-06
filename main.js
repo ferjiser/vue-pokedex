@@ -11,12 +11,24 @@ var app = new Vue({
             "normal": "#A8A878",
             "electric": "#F8D030"
         },
-        pokemons: []
+        pokemons: [],
+        searchText: ''
     },
     created(){
         fetch('https://api.jsonbin.io/b/5ab37f77989617146bd6eb29')
             .then(response => response.json())
             .then(pokemons => this.pokemons = pokemons
         )
+    },
+    methods: {
+        removePokemon(pokemonToRemove){
+            this.pokemons = this.pokemons.filter(pokemon => pokemon !== pokemonToRemove);
+        }
+    },
+    computed: {
+        filteredPokemons(){
+            //Vue es capaz de saber que depende de this.pokemons y de this.searchText y si alguna cambia se actualiza
+            return this.pokemons.filter(pokemon => pokemon.name.includes(this.searchText));
+        }
     }
 });
