@@ -12,7 +12,8 @@ var app = new Vue({
             "electric": "#F8D030"
         },
         pokemons: [],
-        searchText: ''
+        searchText: '',
+        selectedPokemonTypes: []
     },
     created(){
         fetch('https://api.jsonbin.io/b/5ab37f77989617146bd6eb29')
@@ -28,7 +29,13 @@ var app = new Vue({
     computed: {
         filteredPokemons(){
             //Vue es capaz de saber que depende de this.pokemons y de this.searchText y si alguna cambia se actualiza
-            return this.pokemons.filter(pokemon => pokemon.name.includes(this.searchText));
+            return this.pokemons
+            .filter(pokemon => pokemon.name.includes(this.searchText))
+            .filter(pokemon => {
+                if (this.selectedPokemonTypes.length === 0) return true;
+                return pokemon.types
+                    .find(type => this.selectedPokemonTypes.includes(type));
+            });;;
         }
     }
 });
